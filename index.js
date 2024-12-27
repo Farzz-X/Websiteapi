@@ -13,7 +13,7 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 const genAI = new GoogleGenerativeAI(pickRandom(['AIzaSyAxyeDIZautcsjCWYEfsranT9z-i14wDLU', 'AIzaSyCfH7p_qrkbNJ4pTE51_oU8I6G5tKR8kIs']));
 var model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
-const author = "DannTeam";
+const author = "FarisFreya";
 const PORT = process.env.PORT || 3000;
 const app = express();
 
