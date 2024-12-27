@@ -29,36 +29,29 @@ async function tiktok(url) {
 }
 
 async function pindl(url) {
-    try {
-        let a = await axios.get(url, {
-            headers: {
-                'User-Agent': "Mozilla/5.0 (Linux; Android 12; SAMSUNG SM-S908B) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/17.0 Chrome/96.0.4664.104 Mobile Safari/537.36",
-                'Accept-Language': 'id-ID,id;q=0.9,en-US;q=0.8,en;q=0.7',
-            }
-        })
+    return new Promise(async (resolve, reject) => {
+        try {
+            const params = new URLSearchParams();
+            params.append("url", url);
 
-        let $ = cheerio.load(a.data)
-        let x = $('script[data-test-id="leaf-snippet"]').text()
-        let y = $('script[data-test-id="video-snippet"]').text()
+            const response = await axios.post('https://pinterestvideodownloader.com/', params);
+            const htmlContent = response.data;
 
-        let g = {
-            status: true,
-            isVideo: y ? true : false,
-            info: JSON.parse(x),
-            image: JSON.parse(x).image,
-            video: y ? JSON.parse(y).contentUrl : ''
+            const $ = cheerio.load(htmlContent);
+
+            $("table > tbody > tr").each(function(index, element) {
+                const url = $(element).find("td").eq(0).find("a").attr("href");
+
+                if (url && url !== "") {
+                    resolve(url);
+                }
+            });
+
+        } catch (error) {
+            reject(error);
         }
-
-        return g
-    } catch (e) {
-        return {
-            status: false,
-            mess: "failed download"
-        }
-    }
-}
-
-
+    });
+};
 async function igdl(url) {
             let res = await axios("https://indown.io/");
             let _$ = cheerio.load(res.data);
