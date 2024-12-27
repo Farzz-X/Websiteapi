@@ -27,31 +27,7 @@ async function tiktok(url) {
     }
   });
 }
-
-async function pindl(url) {
-    return new Promise(async (resolve, reject) => {
-        try {
-            const params = new URLSearchParams();
-            params.append("url", url);
-
-            const response = await axios.post('https://pinterestvideodownloader.com/', params);
-            const htmlContent = response.data;
-
-            const $ = cheerio.load(htmlContent);
-
-            $("table > tbody > tr").each(function(index, element) {
-                const url = $(element).find("td").eq(0).find("a").attr("href");
-
-                if (url && url !== "") {
-                    resolve(url);
-                }
-            });
-
-        } catch (error) {
-            reject(error);
-        }
-    });
-};
+ 
 async function igdl(url) {
             let res = await axios("https://indown.io/");
             let _$ = cheerio.load(res.data);
@@ -142,6 +118,28 @@ async function tiktoks(query) {
     throw error;
   }
 }
+
+async function blackboxAIChat(message) {
+        try {
+          const response = await axios.post('https://www.blackbox.ai/api/chat', {
+            messages: [{ id: null, content: message, role: 'user' }],
+            id: null,
+            previewToken: null,
+            userId: null,
+            codeModelMode: true,
+            agentMode: {},
+            trendingAgentMode: {},
+            isMicMode: false,
+            isChromeExt: false,
+            githubToken: null
+          });
+      
+          return response.data;
+        } catch (error) {
+          throw error;
+        }
+      }
+        
 
 async function aiodl(url) {
   try {
