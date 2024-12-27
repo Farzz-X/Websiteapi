@@ -165,13 +165,16 @@ app.get('/facebook', async (req, res) => {
 });
 
 app.get('/blackboxai', async (req, res) => {
+  const url = req.query.url;
+  if (!url) return res.json(msg.paramurl);
+
     try {
-      const text = req.query.text;
-      if (!text) {
-        return res.status(400).json({ error: 'Parameter "text" tidak ditemukan' });
-      }
-      const response = await blackboxAIChat(text);
-      res.json({
+      const data = await blackboxai(url);
+    if (!data) {
+      return res.json({ status: false, message: msg.nodata });
+    }
+
+    res.json({
       status: true,
       creator: author,
       result: data
