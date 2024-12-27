@@ -3,7 +3,7 @@
  * ig: @dannalwaysalone
 */
 
-const author = 'DannTeam'
+const author = 'FarisFreya'
 
 msg = {
   paramurl: {
