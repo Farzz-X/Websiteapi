@@ -10,7 +10,7 @@ const cors = require('cors');
 const secure = require('ssl-express-www');
 const path = require('path');
 const { GoogleGenerativeAI } = require("@google/generative-ai");
-const genAI = new GoogleGenerativeAI(pickRandom(['AIzaSyAxyeDIZautcsjCWYEfsranT9z-i14wDLU', 'AIzaSyCfH7p_qrkbNJ4pTE51_oU8I6G5tKR8kIs']));
+const genAI = new GoogleGenerativeAI(pickRandom(['AIzaSyDQ0KbX7Jt4fsBuKb2PwuULjf_ZUuk-vRA', 'AIzaSyDQ0KbX7Jt4fsBuKb2PwuULjf_ZUuk-vRA']));
 var model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
 const author = "FarisFreya";
