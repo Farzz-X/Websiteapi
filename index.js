@@ -122,25 +122,7 @@ app.get('/instagram', async (req, res) => {
   }
 });
 
-app.get('/pindl', async (req, res) => {
-  const url = req.query.url;
-  if (!url) return res.json(msg.paramurl);
 
-  try {
-    const data = await pindl(url);
-    if (!data) {
-      return res.json({ status: false, message: msg.nodata });
-    }
-
-    res.json({
-      status: true,
-      creator: author,
-      result: data
-    });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
 
 app.get('/capcut', async (req, res) => {
   const url = req.query.url;
@@ -173,6 +155,23 @@ app.get('/facebook', async (req, res) => {
     }
 
     res.json({
+      status: true,
+      creator: author,
+      result: data
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.get('/blackboxai', async (req, res) => {
+    try {
+      const text = req.query.text;
+      if (!text) {
+        return res.status(400).json({ error: 'Parameter "text" tidak ditemukan' });
+      }
+      const response = await blackboxAIChat(text);
+      res.json({
       status: true,
       creator: author,
       result: data
