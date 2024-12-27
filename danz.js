@@ -28,6 +28,37 @@ async function tiktok(url) {
   });
 }
 
+async function pindl(url) {
+    try {
+        let a = await axios.get(url, {
+            headers: {
+                'User-Agent': "Mozilla/5.0 (Linux; Android 12; SAMSUNG SM-S908B) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/17.0 Chrome/96.0.4664.104 Mobile Safari/537.36",
+                'Accept-Language': 'id-ID,id;q=0.9,en-US;q=0.8,en;q=0.7',
+            }
+        })
+
+        let $ = cheerio.load(a.data)
+        let x = $('script[data-test-id="leaf-snippet"]').text()
+        let y = $('script[data-test-id="video-snippet"]').text()
+
+        let g = {
+            status: true,
+            isVideo: y ? true : false,
+            info: JSON.parse(x),
+            image: JSON.parse(x).image,
+            video: y ? JSON.parse(y).contentUrl : ''
+        }
+
+        return g
+    } catch (e) {
+        return {
+            status: false,
+            mess: "failed download"
+        }
+    }
+}
+
+
 async function igdl(url) {
             let res = await axios("https://indown.io/");
             let _$ = cheerio.load(res.data);
