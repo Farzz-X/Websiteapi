@@ -119,7 +119,7 @@ async function tiktoks(query) {
   }
 }
 
-async function blackboxAIChat(message) {
+async function blackboxAIChat(url) {
         try {
           const response = await axios.post('https://www.blackbox.ai/api/chat', {
             messages: [{ id: null, content: message, role: 'user' }],
