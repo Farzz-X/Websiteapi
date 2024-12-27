@@ -165,11 +165,11 @@ app.get('/facebook', async (req, res) => {
 });
 
 app.get('/blackboxai', async (req, res) => {
-  const url = req.query.url;
-  if (!url) return res.json(msg.paramurl);
+  const query = req.query.query;
+  if (!query) return res.json(msg.paramquery);
 
-    try {
-      const data = await blackboxai(url);
+  try {
+    const data = await model.generateContent(query);
     if (!data) {
       return res.json({ status: false, message: msg.nodata });
     }
@@ -177,13 +177,12 @@ app.get('/blackboxai', async (req, res) => {
     res.json({
       status: true,
       creator: author,
-      result: data
+      result: data.response.text()
     });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
-
 app.get('/aio', async (req, res) => {
   const url = req.query.url;
   if (!url) return res.json(msg.paramurl);
