@@ -295,5 +295,6 @@ module.exports = {
   listmember,
   luminai,
   pinterest,
+  brat,
   aiodl
 }
