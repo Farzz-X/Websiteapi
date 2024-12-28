@@ -1,6 +1,6 @@
 
 require('./message');
-const { tiktok, capcut, igdl, fbdl, aiodl, tiktoks, pindl, listmember, luminai } = require('./danz');
+const { tiktok, capcut, igdl, fbdl, aiodl, tiktoks, pindl, listmember, luminai, idnStalk } = require('./danz');
 const express = require('express');
 const rateLimit = require('express-rate-limit');
 const compression = require('compression');
@@ -124,6 +124,24 @@ app.get('/luminai', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
+app.get('/idnStalk', async (req, res) => {
+    try {
+      const { text } = req.query;
+      if (!text) {
+        return res.status(400).json({ error: 'Parameter "text" Tidak Ditemukan, Tolong Masukkan Perintah' });
+      }
+      const response = await idnStalk(text);
+      res.status(200).json({
+        status: true,
+      creator: author,
+      message: response
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 
 app.get('/pindl', async (req, res) => {
   const url = req.query.url;
