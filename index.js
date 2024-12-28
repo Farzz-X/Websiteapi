@@ -1,5 +1,5 @@
 require('./message');
-const { tiktok, capcut, igdl, fbdl, aiodl, tiktoks } = require('./danz');
+const { tiktok, capcut, igdl, fbdl, aiodl, tiktoks, pindl } = require('./danz');
 const express = require('express');
 const rateLimit = require('express-rate-limit');
 const compression = require('compression');
