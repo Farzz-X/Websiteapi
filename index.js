@@ -65,6 +65,11 @@ app.get('/tiktokdl', (req, res) => {
   res.render('tiktokdl')
 });
 
+app.get('/luminai', (req, res) => {
+  res.render('luminai')
+});
+
+  
 app.get('/douyindl', (req, res) => {
   res.render('douyindl')
 });
