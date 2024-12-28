@@ -244,7 +244,23 @@ app.get('/gemini', async (req, res) => {
   }
 });
 
-
+app.get('/luminai', async (req, res) => {
+    try {
+      const { text } = req.query;
+      if (!text) {
+        return res.status(400).json({ error: 'Parameter "text" Tidak Ditemukan, Tolong Masukkan Perintah' });
+      }
+      const response = await fetchContent(text);
+      res.status(200).json({
+        status: true,
+        creator: author,
+        data: response
+      });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  });
+};
 // Stalker
 
 app.listen(PORT, () => {
