@@ -119,7 +119,7 @@ async function tiktoks(query) {
   }
 }
 
-async function freeSoundSearch(keys) {
+async function freesoundsearch(query) {
     try {
         const response = await axios.get('https://freesound.org/search/?q=' + keys);
         const $ = cheerio.load(response.data);
