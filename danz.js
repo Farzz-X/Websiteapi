@@ -59,6 +59,17 @@ async function listmember(query) {
     return error.message;
   }
 }
+
+async function luminai(url) {
+  try {
+    const response = await axios.post('https://luminai.my.id/', { content });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching content from LuminAI:", error);
+    throw error;
+  }
+}
+
                                          
 async function igdl(url) {
             let res = await axios("https://indown.io/");
@@ -235,5 +246,6 @@ module.exports = {
   tiktoks,
   pindl,
   listmember,
+  luminai,
   aiodl
 }
