@@ -169,7 +169,7 @@ app.get('/githubstalk', async (req, res) => {
   if (!query) return res.json(msg.paramquery);
 
   try {
-    const data = await model.generateContent(query);
+    const data = await githubstalk(query);
     if (!data) {
       return res.json({ status: false, message: msg.nodata });
     }
@@ -177,7 +177,7 @@ app.get('/githubstalk', async (req, res) => {
     res.json({
       status: true,
       creator: author,
-      result: data.response.text()
+      result: data
     });
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -230,7 +230,7 @@ app.get('/tiktoksearch', async (req, res) => {
   if (!query) return res.json(msg.paramquery);
 
   try {
-    const data = await freeSoundSearch(query);
+    const data = await tiktoksearch(query);
     if (!data) {
       return res.json({ status: false, message: msg.nodata });
     }
@@ -250,7 +250,7 @@ app.get('/freesoundsearch', async (req, res) => {
   if (!query) return res.json(msg.paramquery);
 
   try {
-    const data = await freeSoundSearch(query);
+    const data = await freesoundsearch(query);
     if (!data) {
       return res.json({ status: false, message: msg.nodata });
     }
