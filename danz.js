@@ -28,15 +28,7 @@ async function tiktok(url) {
   });
 }
 
- async function fetchContent(content) {
-  try {
-    const response = await axios.post('https://luminai.my.id/', { content });
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching content from LuminAI:", error);
-    throw error;
-  }
-}       
+ 
  
 async function igdl(url) {
             let res = await axios("https://indown.io/");
