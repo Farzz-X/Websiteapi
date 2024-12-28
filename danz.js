@@ -62,7 +62,7 @@ async function listmember(query) {
 
 async function luminai(url) {
   try {
-    const response = await axios.post('https://luminai.my.id', { url });
+    const response = await axios.post('https://luminai.my.id/chat', { url });
     return response.data;
   } catch (error) {
     console.error("Error fetching content from LuminAI:", error);
