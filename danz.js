@@ -268,5 +268,6 @@ module.exports = {
   pindl,
   listmember,
   luminai,
+  pinterest,
   aiodl
 }
