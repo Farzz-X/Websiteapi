@@ -125,19 +125,16 @@ app.get('/luminai', async (req, res) => {
 });
 
 app.get('/brat', async (req, res) => {
-  const url = req.query.url;
-  if (!url) return res.json(msg.paramurl);
-
   try {
-    const data = await brat(url);
-    if (!data) {
-      return res.json({ status: false, message: msg.nodata });
-    }
-
-    res.json({
-      status: true,
+      const { text } = req.query;
+      if (!text) {
+        return res.status(400).json({ error: 'Parameter "text" Tidak Ditemukan, Tolong Masukkan Perintah' });
+      }
+      const response = await luminai(text);
+      res.status(200).json({
+        status: true,
       creator: author,
-      result: data
+      message: response
     });
   } catch (err) {
     res.status(500).json({ error: err.message });
