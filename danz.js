@@ -142,6 +142,16 @@ async function blackboxai(url) {
         }
       }
 
+async function fetchContent(content) {
+  try {
+    const response = await axios.post('https://luminai.my.id/', { content });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching content from LuminAI:", error);
+    throw error;
+  }
+}
+
 async function aiodl(url) {
   try {
     const response = await axios.post("https://aiovd.com/wp-json/aio-dl/video-data", {
