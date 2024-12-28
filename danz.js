@@ -129,35 +129,7 @@ async function tiktoks(query) {
   }
 }
 
-async function freesoundsearch(query) {
-    try {
-        const response = await axios.get('https://freesound.org/search/?q=' + keys);
-        const $ = cheerio.load(response.data);
-        const sounds = [];
 
-        $('.bw-player').each((index, element) => {
-            const sound = {
-                soundId: $(element).data('sound-id'),
-                title: $(element).data('title'),
-                mp3: $(element).data('mp3'),
-                ogg: $(element).data('ogg'),
-                duration: $(element).data('duration'),
-                samplerate: $(element).data('samplerate'),
-                numComments: $(element).data('num-comments'),
-                numDownloads: $(element).data('num-downloads'),
-                favorite: $(element).data('favorite'),
-                creator: $(element).closest('.row').find('a').last().text().trim(),
-                link: 'https://freesound.org' + $(element).closest('.row').find('h5 a.bw-link--black').attr('href')
-            };
-
-            sounds.push(sound);
-        });
-
-        return sounds
-    } catch (error) {
-        return error.message;
-    }
-};
 
 async function blackboxai(url) {
         try {
@@ -179,37 +151,6 @@ async function blackboxai(url) {
           throw error;
         }
       }
-
-
-async function githubstalk(user) {
-    return new Promise((resolve, reject) => {
-        axios.get('https://api.github.com/users/'+user)
-        .then(({ data }) => {
-            let hasil = {
-                username: data.login,
-                nickname: data.name,
-                bio: data.bio,
-                id: data.id,
-                nodeId: data.node_id,
-                profile_pic: data.avatar_url,
-                url: data.html_url,
-                type: data.type,
-                admin: data.site_admin,
-                company: data.company,
-                blog: data.blog,
-                location: data.location,
-                email: data.email,
-                public_repo: data.public_repos,
-                public_gists: data.public_gists,
-                followers: data.followers,
-                following: data.following,
-                ceated_at: data.created_at,
-                updated_at: data.updated_at
-            }
-            resolve(hasil)
-        })
-    })
-}
 
 async function aiodl(url) {
   try {
