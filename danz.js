@@ -119,6 +119,36 @@ async function tiktoks(query) {
   }
 }
 
+async function freeSoundSearch(keys) {
+    try {
+        const response = await axios.get('https://freesound.org/search/?q=' + keys);
+        const $ = cheerio.load(response.data);
+        const sounds = [];
+
+        $('.bw-player').each((index, element) => {
+            const sound = {
+                soundId: $(element).data('sound-id'),
+                title: $(element).data('title'),
+                mp3: $(element).data('mp3'),
+                ogg: $(element).data('ogg'),
+                duration: $(element).data('duration'),
+                samplerate: $(element).data('samplerate'),
+                numComments: $(element).data('num-comments'),
+                numDownloads: $(element).data('num-downloads'),
+                favorite: $(element).data('favorite'),
+                creator: $(element).closest('.row').find('a').last().text().trim(),
+                link: 'https://freesound.org' + $(element).closest('.row').find('h5 a.bw-link--black').attr('href')
+            };
+
+            sounds.push(sound);
+        });
+
+        return sounds
+    } catch (error) {
+        return error.message;
+    }
+};
+
 async function blackboxai(url) {
         try {
           const response = await axios.post('https://www.blackbox.ai/api/chat', {
