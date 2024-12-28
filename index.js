@@ -130,7 +130,7 @@ app.get('/brat', async (req, res) => {
       if (!text) {
         return res.status(400).json({ error: 'Parameter "text" Tidak Ditemukan, Tolong Masukkan Perintah' });
       }
-      const response = await luminai(text);
+      const response = await brat(text);
       res.status(200).json({
         status: true,
       creator: author,
