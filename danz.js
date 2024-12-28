@@ -245,6 +245,5 @@ module.exports = {
   pindl,
   listmember,
   luminai,
-  idnStalk,
   aiodl
 }
