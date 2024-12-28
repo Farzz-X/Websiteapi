@@ -27,7 +27,39 @@ async function tiktok(url) {
     }
   });
 }
-                          
+
+async function listMemberJkt48(query) {
+  try {
+    const { data } = await axios.get('https://jkt48.com/member/list?lang=id');
+    const $ = cheerio.load(data);
+    const members = [];
+//dibuat oleh hann
+    $('div.col-4.col-lg-2').each((_, element) => {
+      let name = $(element).find('.entry-member__name a').html();
+      if (name) {
+        name = name.replace(/<br\s*\/?>/g, ' ').trim();
+      }
+
+      const profileLink = $(element).find('.entry-member a').attr('href');
+      const imageSrc = $(element).find('.entry-member img').attr('src');
+
+      if (!name || !profileLink || !imageSrc) {
+        console.log('Error in element:', $(element).html());
+      }
+
+      members.push({
+        name,
+        profileLink: profileLink ? `https://jkt48.com${profileLink}` : null,
+        imageSrc: imageSrc ? `https://jkt48.com${imageSrc}` : null
+      });
+    });
+
+    return members;
+  } catch (error) {
+    return error.message;
+  }
+}
+                                         
 async function igdl(url) {
             let res = await axios("https://indown.io/");
             let _$ = cheerio.load(res.data);
