@@ -60,32 +60,6 @@ async function listmember(query) {
   }
 }
 
-async function idnStalk(username) {
-    try {
-        const { data } = await axios.get('https://www.idn.app/' + username);
-        const $ = cheerio.load(data);
-        const jsonData = JSON.parse($('#__NEXT_DATA__').html());
-
-        const profile = jsonData.props.pageProps.profile;
-        const livestreams = jsonData.props.pageProps.livestreams;
-
-        const result = {
-            name: profile.name,
-            username: profile.username,
-            bioDescription: profile.bio_description || "tidak memiliki bio",
-            avatar: profile.avatar,
-            followingCount: profile.following_count,
-            followerCount: profile.follower_count,
-            livestreams: livestreams.length > 0 ? livestreams.map(stream => ({
-                title: stream.title,
-                imageUrl: stream.image_url,
-                category: stream.category.name,
-                viewCount: stream.view_count,
-                playbackUrl: stream.playback_url,
-                status: stream.status
-            })) : "tidak ada"
-        };
-
 async function luminai(content) {
   try {
     const response = await axios.post('https://luminai.my.id/', { content });
