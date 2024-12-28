@@ -229,7 +229,7 @@ app.get('/freeSoundSearch', async (req, res) => {
   if (!query) return res.json(msg.paramquery);
 
   try {
-    const data = await tiktoks(query);
+    const data = await freeSoundSearch(query);
     if (!data) {
       return res.json({ status: false, message: msg.nodata });
     }
