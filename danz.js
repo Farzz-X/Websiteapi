@@ -27,8 +27,6 @@ async function tiktok(url) {
     }
   });
 }
-
- 
  
 async function igdl(url) {
             let res = await axios("https://indown.io/");
