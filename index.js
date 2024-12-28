@@ -209,6 +209,26 @@ app.get('/tiktoksearch', async (req, res) => {
   if (!query) return res.json(msg.paramquery);
 
   try {
+    const data = await freeSoundSearch(query);
+    if (!data) {
+      return res.json({ status: false, message: msg.nodata });
+    }
+
+    res.json({
+      status: true,
+      creator: author,
+      result: data
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.get('/freeSoundSearch', async (req, res) => {
+  const query = req.query.query;
+  if (!query) return res.json(msg.paramquery);
+
+  try {
     const data = await tiktoks(query);
     if (!data) {
       return res.json({ status: false, message: msg.nodata });
