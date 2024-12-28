@@ -1,4 +1,3 @@
-
 require('./message');
 const { tiktok, capcut, igdl, fbdl, aiodl, tiktoks, pindl, listmember, luminai, idnStalk } = require('./danz');
 const express = require('express');
