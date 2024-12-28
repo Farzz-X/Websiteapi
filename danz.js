@@ -83,6 +83,32 @@ async function listmember(query) {
   }
 }
 
+async function brat(text) {
+  try {
+    return await new Promise((resolve, reject) => {
+      if(!text) return reject("missing text input");
+      axios.get("https://brat.caliphdev.com/api/brat", {
+        params: {
+          text
+        },
+        responseType: "arraybuffer"
+      }).then(res => {
+        const image = Buffer.from(res.data);
+        if(image.length <= 10240) return reject("failed generate brat");
+        return resolve({
+          success: true, 
+          image
+        })
+      })
+    })
+  } catch (e) {
+    return {
+      success: false,
+      errors: e
+    }
+  }
+}
+
 async function luminai(content) {
   try {
     const response = await axios.post('https://luminai.my.id/', { content });
