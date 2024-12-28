@@ -171,7 +171,7 @@ async function blackboxai(url) {
       }
 
 
-async function githubstalk(user) {
+async function githubstalk(query) {
     return new Promise((resolve, reject) => {
         axios.get('https://api.github.com/users/'+user)
         .then(({ data }) => {
