@@ -1,5 +1,5 @@
 require('./message');
-const { tiktok, capcut, igdl, fbdl, aiodl, tiktoks, pindl, listMemberJkt48 } = require('./danz');
+const { tiktok, capcut, igdl, fbdl, aiodl, tiktoks, pindl, listmember } = require('./danz');
 const express = require('express');
 const rateLimit = require('express-rate-limit');
 const compression = require('compression');
@@ -232,12 +232,12 @@ app.get('/aio', async (req, res) => {
 });
 
 // Search
-app.get('/listMemberJkt48', async (req, res) => {
+app.get('/listmember', async (req, res) => {
   const query = req.query.query;
   if (!query) return res.json(msg.paramquery);
 
   try {
-    const data = await listMemberJkt48(query);
+    const data = await listmember(query);
     if (!data) {
       return res.json({ status: false, message: msg.nodata });
     }
