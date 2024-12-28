@@ -232,6 +232,26 @@ app.get('/aio', async (req, res) => {
 });
 
 // Search
+app.get('/listMemberJkt48', async (req, res) => {
+  const query = req.query.query;
+  if (!query) return res.json(msg.paramquery);
+
+  try {
+    const data = await listMemberJkt48(query);
+    if (!data) {
+      return res.json({ status: false, message: msg.nodata });
+    }
+
+    res.json({
+      status: true,
+      creator: author,
+      result: data
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 app.get('/tiktoksearch', async (req, res) => {
   const query = req.query.query;
   if (!query) return res.json(msg.paramquery);
@@ -252,6 +272,7 @@ app.get('/tiktoksearch', async (req, res) => {
   }
 });
 
+        
 // AI
 app.get('/gemini', async (req, res) => {
   const query = req.query.query;
