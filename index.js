@@ -165,11 +165,11 @@ app.get('/facebook', async (req, res) => {
 });
 
 app.get('/githubstalk', async (req, res) => {
-  const user = req.query.user;
+  const query = req.query.query;
   if (!url) return res.json(msg.paramurl);
 
   try {
-    const data = await githubstalk(user);
+    const data = await githubstalk(query);
     if (!data) {
       return res.json({ status: false, message: msg.nodata });
     }
