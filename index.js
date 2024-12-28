@@ -167,6 +167,26 @@ app.get('/facebook', async (req, res) => {
   }
 });
 
+      app.get('/liputan6', async (req, res) => {
+    try {
+      const data = await liputan6();
+      if (data.length === 0) {
+        return res.status(404).json({ message: 'Tidak ada berita terbaru yang ditemukan.' });
+      }
+
+      res.status(200).json({
+        status: true,
+        creator: author,
+        result: data
+      });
+    } catch (error) {
+      res.status(500).json({ error: 'Terjadi kesalahan saat mengambil data.' });
+    }
+  });
+
+};
+
+
 app.get('/blackboxai', async (req, res) => {
   const query = req.query.query;
   if (!query) return res.json(msg.paramquery);
