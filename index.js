@@ -1,5 +1,5 @@
 require('./message');
-const { tiktok, capcut, igdl, fbdl, aiodl, tiktoks, pindl, listmember } = require('./danz');
+const { tiktok, capcut, igdl, fbdl, aiodl, tiktoks, pindl, listmember, luminai } = require('./danz');
 const express = require('express');
 const rateLimit = require('express-rate-limit');
 const compression = require('compression');
@@ -99,6 +99,23 @@ app.get('/tiktok', async (req, res) => {
 
     res.json({
       status: true,
+      creator: author,
+      result: data
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.get('/luminai', async (req, res) => {
+    try {
+      const { text } = req.query;
+      if (!text) {
+        return res.status(400).json({ error: 'Parameter "text" Tidak Ditemukan, Tolong Masukkan Perintah' });
+      }
+      const response = await luminai(text);
+      res.status(200).json({
+        status: true,
       creator: author,
       result: data
     });
