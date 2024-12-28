@@ -28,7 +28,7 @@ async function tiktok(url) {
   });
 }
 
-async function listMemberJkt48(query) {
+async function listmember(query) {
   try {
     const { data } = await axios.get('https://jkt48.com/member/list?lang=id');
     const $ = cheerio.load(data);
@@ -234,5 +234,6 @@ module.exports = {
   capcut,
   tiktoks,
   pindl,
+  listmember,
   aiodl
 }
