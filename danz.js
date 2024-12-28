@@ -201,5 +201,6 @@ module.exports = {
   igdl,
   capcut,
   tiktoks,
+  pindl,
   aiodl
 }
