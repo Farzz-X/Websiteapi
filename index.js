@@ -1,5 +1,5 @@
 require('./message');
-const { tiktok, capcut, igdl, fbdl, aiodl, tiktoks, pindl, listmember, luminai, pinterest } = require('./danz');
+const { tiktok, capcut, igdl, fbdl, aiodl, tiktoks, pindl, listmember, luminai, pinterest, brat } = require('./danz');
 const express = require('express');
 const rateLimit = require('express-rate-limit');
 const compression = require('compression');
@@ -124,8 +124,25 @@ app.get('/luminai', async (req, res) => {
   }
 });
 
+app.get('/brat', async (req, res) => {
+  const url = req.query.url;
+  if (!url) return res.json(msg.paramurl);
 
+  try {
+    const data = await brat(url);
+    if (!data) {
+      return res.json({ status: false, message: msg.nodata });
+    }
 
+    res.json({
+      status: true,
+      creator: author,
+      result: data
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
 
 app.get('/pindl', async (req, res) => {
