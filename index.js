@@ -164,6 +164,27 @@ app.get('/facebook', async (req, res) => {
   }
 });
 
+app.get('/githubstalk', async (req, res) => {
+  const user = req.query.user;
+  if (!url) return res.json(msg.paramurl);
+
+  try {
+    const data = await githubstalk(user);
+    if (!data) {
+      return res.json({ status: false, message: msg.nodata });
+    }
+
+    res.json({
+      status: true,
+      creator: author,
+      result: data
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
 app.get('/blackboxai', async (req, res) => {
   const query = req.query.query;
   if (!query) return res.json(msg.paramquery);
