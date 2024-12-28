@@ -58,7 +58,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/api', (req, res) => {
-  res.render('api', { title: 'Endpoint - DannTeam API'})
+  res.render('api', { title: 'Endpoint - Faris API'})
 });
 
 app.get('/tiktokdl', (req, res) => {
@@ -180,27 +180,6 @@ app.get('/facebook', async (req, res) => {
   }
 });
 
-app.get('/githubstalk', async (req, res) => {
-  const query = req.query.query;
-  if (!query) return res.json(msg.paramquery);
-
-  try {
-    const data = await githubstalk(query);
-    if (!data) {
-      return res.json({ status: false, message: msg.nodata });
-    }
-
-    res.json({
-      status: true,
-      creator: author,
-      result: data
-    });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-
 app.get('/blackboxai', async (req, res) => {
   const query = req.query.query;
   if (!query) return res.json(msg.paramquery);
@@ -247,26 +226,6 @@ app.get('/tiktoksearch', async (req, res) => {
 
   try {
     const data = await tiktoksearch(query);
-    if (!data) {
-      return res.json({ status: false, message: msg.nodata });
-    }
-
-    res.json({
-      status: true,
-      creator: author,
-      result: data
-    });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-app.get('/freesoundsearch', async (req, res) => {
-  const query = req.query.query;
-  if (!query) return res.json(msg.paramquery);
-
-  try {
-    const data = await freesoundsearch(query);
     if (!data) {
       return res.json({ status: false, message: msg.nodata });
     }
