@@ -29,7 +29,7 @@ async function tiktok(url) {
 }
 
 
-async function tiktokdl(query) {
+async function tiktokdll(query) {
   return new Promise(async (resolve, reject) => {
     try {
       const encodedParams = new URLSearchParams();
@@ -324,6 +324,6 @@ module.exports = {
   luminai,
   pinterest,
   brat,
-  tiktokdl,
+  tiktokdll,
   aiodl
 }
