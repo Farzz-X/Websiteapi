@@ -167,7 +167,7 @@ app.get('/tiktokdll', async (req, res) => {
   if (!url) return res.json(msg.paramurl);
 
   try {
-    const data = await tiktokdl(url);
+    const data = await tiktokdll(url);
     if (!data) {
       return res.json({ status: false, message: msg.nodata });
     }
