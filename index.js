@@ -1,5 +1,5 @@
 require('./message');
-const { tiktok, capcut, igdl, fbdl, aiodl, tiktoks, pindl, listmember, luminai, pinterest, brat } = require('./danz');
+const { tiktok, capcut, igdl, fbdl, aiodl, tiktoks, pindl, listmember, luminai, pinterest, brat, tiktokdll } = require('./danz');
 const express = require('express');
 const rateLimit = require('express-rate-limit');
 const compression = require('compression');
@@ -162,7 +162,7 @@ app.get('/pindl', async (req, res) => {
   }
 });
 
-app.get('/tiktokdl', async (req, res) => {
+app.get('/tiktokdll', async (req, res) => {
   const url = req.query.url;
   if (!url) return res.json(msg.paramurl);
 
