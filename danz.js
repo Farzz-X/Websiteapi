@@ -228,7 +228,7 @@ async function pindl(url) {
     }
 }
 
-async function tiktoks(query) {
+async function tiktoksearch(query) {
   try {
     const response = await axios({
       method: 'POST',
@@ -318,7 +318,7 @@ module.exports = {
   tiktok,
   igdl,
   capcut,
-  tiktoks,
+  tiktoksearch,
   pindl,
   listmember,
   luminai,
