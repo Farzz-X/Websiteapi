@@ -365,5 +365,6 @@ module.exports = {
   pinterest,
   brat,
   tiktokdll,
+  jadwalSholat,
   aiodl
 }
