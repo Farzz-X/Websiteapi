@@ -1,5 +1,5 @@
 require('./message');
-const { tiktok, capcut, igdl, fbdl, aiodl, tiktoksearch, pindl, listmember, luminai, pinterest, brat, tiktokdll } = require('./danz');
+const { tiktok, capcut, igdl, fbdl, aiodl, tiktoksearch, pindl, listmember, luminai, pinterest, brat, tiktokdll, jadwalSholat } = require('./faris');
 const express = require('express');
 const rateLimit = require('express-rate-limit');
 const compression = require('compression');
@@ -327,6 +327,27 @@ app.get('/tiktoksearch', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
+app.get('/jadwalSholat', async (req, res) => {
+  const query = req.query.query;
+  if (!query) return res.json(msg.paramquery);
+
+  try {
+    const data = await jadwalSholat(query);
+    if (!data) {
+      return res.json({ status: false, message: msg.nodata });
+    }
+
+    res.json({
+      status: true,
+      creator: author,
+      result: data
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 
 app.get('/pinterest', async (req, res) => {  
   const query = req.query.query;
