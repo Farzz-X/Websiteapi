@@ -1,5 +1,5 @@
 require('./message');
-const { tiktok, capcut, igdl, fbdl, aiodl, tiktoksearch, pindl, listmember, luminai, pinterest, brat, tiktokdll, jadwalSholat } = require('./faris');
+const { tiktok, capcut, igdl, fbdl, aiodl, tiktoksearch, pindl, listmember, luminai, pinterest, brat, tiktokdll, jadwalSholat } = require('./danz');
 const express = require('express');
 const rateLimit = require('express-rate-limit');
 const compression = require('compression');
@@ -100,6 +100,7 @@ app.get('/tiktok', async (req, res) => {
     res.json({
       status: true,
       creator: author,
+      limitnya: limit,
       result: data
     });
   } catch (err) {
