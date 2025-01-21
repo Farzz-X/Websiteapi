@@ -28,6 +28,46 @@ async function tiktok(url) {
   });
 }
 
+async function jadwalSholat() {
+    try {
+        const { data } = await axios.get("https://prayer-times.muslimpro.com/en/find?country_code=ID&country_name=Indonesia&city_name=undefined&coordinates=-6.1944491,106.8229198#");
+        const $ = cheerio.load(data);
+
+        const tahunSekarang = $('li.monthpicker .display-month').text().trim();
+
+        const jadwalShalat = [];
+        $('table.prayer-times tbody tr').each((index, element) => {
+            const tanggal = $(element).find('td.prayertime-1').text().trim();
+            const imsak = $(element).find('td.prayertime').eq(0).text().trim();
+            const shubuh = $(element).find('td.prayertime').eq(1).text().trim();
+            const duhur = $(element).find('td.prayertime').eq(2).text().trim();
+            const asar = $(element).find('td.prayertime').eq(3).text().trim();
+            const magrib = $(element).find('td.prayertime').eq(4).text().trim();
+            const isya = $(element).find('td.prayertime').eq(5).text().trim();
+
+            if (tanggal) {
+                jadwalShalat.push({ tanggal, imsak, shubuh, duhur, asar, magrib, isya });
+            }
+        });
+        
+        const hariIni = []
+
+        $('div.prayer-daily-table ul li').each((index, element) => {
+            const sholat = $(element).find('.waktu-solat').text().trim();
+            const jadwal = $(element).find('.jam-solat').text().trim();
+            hariIni.push({ sholat, jadwal });
+        });
+
+        return {
+            tahunSekarang,
+            jadwalShalat,
+            hariIni
+        }
+
+    } catch (error) {
+        return error.message;
+    }
+}
 
 async function tiktokdll(query) {
   return new Promise(async (resolve, reject) => {
