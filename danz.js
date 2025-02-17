@@ -69,7 +69,7 @@ async function jadwalSholat() {
     }
 }
 
-async function SimSimi(text, language = 'id') {
+async function Simsi(text, language = 'id') {
   const { data } = await axios.post("https://api.simsimi.vn/v1/simtalk", new URLSearchParams({
     text,
     lc: language
@@ -379,6 +379,7 @@ module.exports = {
   pinterest,
   brat,
   tiktokdll,
+  Simsi,
   jadwalSholat,
   aiodl
 }
