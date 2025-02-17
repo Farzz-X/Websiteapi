@@ -356,7 +356,6 @@ async function aiodl(url) {
 
 module.exports = {
   tiktok,
-  Ytdl,
   igdl,
   capcut,
   tiktoksearch,
@@ -365,9 +364,7 @@ module.exports = {
   luminai,
   pinterest,
   brat,
-  tiktokDl,
   tiktokdll,
-  Simsi,
   jadwalSholat,
   aiodl
 }
