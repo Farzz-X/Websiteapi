@@ -108,6 +108,27 @@ app.get('/tiktok', async (req, res) => {
   }
 });
 
+ app.get('/Ytdl', async (req, res) => {
+  const url = req.query.url;
+  if (!url) return res.json(msg.paramurl);
+
+  try {
+    const data = await Ytdl(url);
+    if (!data) {
+      return res.json({ status: false, message: msg.nodata });
+    }
+
+    res.json({
+      status: true,
+      creator: author,
+      limitnya: limit,
+      result: data
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});            
+
  app.get('/Simsi', async (req, res) => {
     try {
       const { text } = req.query;
