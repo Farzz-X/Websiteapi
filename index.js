@@ -108,6 +108,24 @@ app.get('/tiktok', async (req, res) => {
   }
 });
 
+ app.get('/Simsi', async (req, res) => {
+    try {
+      const { text } = req.query;
+      if (!text) {
+        return res.status(400).json({ error: 'Parameter "text" Tidak Ditemukan, Tolong Masukkan Perintah' });
+      }
+      const response = await Simsi(text);
+      res.status(200).json({
+        status: true,
+      creator: author,
+      message: response
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+ 
+
 app.get('/luminai', async (req, res) => {
     try {
       const { text } = req.query;
