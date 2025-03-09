@@ -400,6 +400,7 @@ module.exports = {
   pinterest,
   brat,
   tiktokdll,
+  JadwalTvBola,
   jadwalSholat,
   aiodl
 }
