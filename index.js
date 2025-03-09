@@ -408,6 +408,26 @@ app.get('/jadwalSholat', async (req, res) => {
   }
 });
 
+app.get('/JadwalTvBola', async (req, res) => {
+  const query = req.query.query;
+  if (!query) return res.json(msg.paramquery);
+
+  try {
+    const data = await JadwalTvBola(query);
+    if (!data) {
+      return res.json({ status: false, message: msg.nodata });
+    }
+
+    res.json({
+      status: true,
+      creator: author,
+      result: data
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});  
+
 
 app.get('/pinterest', async (req, res) => {  
   const query = req.query.query;
