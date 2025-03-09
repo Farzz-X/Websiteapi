@@ -3,480 +3,316 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>FARIS API</title>
-  <link rel="shortcut icon" type="image/png" href="https://dannteam.com/thumbnail.jpg">
-  <meta name="description" content="FARIS API adalah Restfull API&#39;s yang dibuat dengan Node.js">
+  <title>Restapi</title>
+ 
+  <meta name="description" content="Rest Api adalah Restfull API yang dibuat dengan Node.js">
   <meta name="author" content="Faris">
-  <meta name="keywords" content="Rest-API, Restfull-API, API-Rest, Dann-MD, api, DannTeam">
-  <meta property="og:site_name" content="Restfull API&#39;s">
-  <meta property="og:title" content="Faris API">
-  <meta property="og:url" content="https://website-restapi.vercel.app">
-  <meta property="og:image" content="https://telegra.ph/file/b849a052a00dbbfcd53fd.jpg">
-  <meta property="og:image:type" content="image/jpg">
-  <meta property="og:image:width" content="400">
-  <meta property="og:image:height" content="300">
-  <meta property="og:image:alt" content="DannTeam">
-  <meta property="og:description" content="Faris API adalah Restfull API yang dibuat dengan Node.js">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&family=Inter:wght@300;600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
   <style>
-    /* Import Google font - Poppins */
-    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: "Poppins", sans-serif;
+      font-family: "Inter", sans-serif;
     }
+    
     body {
-      background-color: #121212;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
       color: white;
+      text-align: center;
+      overflow-x: hidden;
     }
-    main {
-      background: #121212;
-      color: white;
-    }
-    .container {
-      max-width: 1300px;
-      width: 100%;
-      margin: 0 auto;
-    }
+
+    /* Navbar */
     header {
       position: fixed;
       top: 0;
-      left: 0;
       width: 100%;
+      background: rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 50px;
       z-index: 1000;
     }
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 60px;
-      background-color: crimson;
-    }
+    
+     .about, .services {
+    padding: 50px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    margin: 50px 20px;
+    border-radius: 10px;
+  }
+
+  .about h2, .services h2 {
+    font-size: 32px;
+    margin-bottom: 10px;
+    background: linear-gradient(90deg, cyan, violet);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .about p, .services p {
+    font-size: 18px;
+    opacity: 0.8;
+  }
+
+  .service-list {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .service-item {
+    width: 300px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    text-align: center;
+  }
+
+  .service-item i {
+    font-size: 40px;
+    margin-bottom: 10px;
+    color: cyan;
+  }
+
+  .service-item h3 {
+    font-size: 22px;
+    margin-bottom: 5px;
+  }
+    
     .nav_logo {
-      padding: 10px 0;
+      font-size: 24px;
+      font-weight: bold;
+      color: white;
+      transition: 0.3s;
     }
+    
+    .nav_logo:hover {
+      color: cyan;
+    }
+
     .menu_items {
       display: flex;
-      list-style: none;
       gap: 20px;
     }
-    a {
-      color: #fff;
+
+    .menu_items a {
       text-decoration: none;
+      font-weight: 500;
+      color: white;
+      transition: 0.3s;
     }
-    .menu_items li:hover {
-      color: #fff;
+    
+    .menu_items a:hover {
+      color: cyan;
     }
 
-    /* Hero */
-    .hero {
-      position: relative;
-      min-height: 100vh;
-      width: 100%;
-      background: url(https://telegra.ph/file/3bcb90f0024d155bedc67.png),
-      background-position: 10px 10px, bottom 215px right 10px, left 55% top -1%, left 45% bottom -1px;
-      background-repeat: no-repeat;
-    }
-    .curveImg {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      pointer-events: none;
-    }
-    .hero .row {
-      display: flex;
-      align-items: center;
-      min-height: 100vh;
-      height: 100%;
-      width: 100%;
-      padding: 0 60px;
-      gap: 30px;
-      justify-content: space-between;
-    }
-    .hero .row h2,
-    .hero .row p {
-      color: #fff;
-    }
-    .hero .row h2 {
-      font-size: 36px;
-      margin-bottom: 16px;
-    }
-    .hero .column {
-      width: 50%;
-    }
-    .buttons {
-      display: flex;
-      margin-top: 25px;
-      gap: 10px;
-    }
-    .btn {
-      padding: 14px 26px;
-      background: crimson;
-      border-radius: 50px;
-      border: none;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      color: white;
-      font-size: 15px;
-    }
-    .btn:last-child {
-      border: 2px solid #fff;
-      background: transparent;
-      color: white;
-    }
-    .btn:last-child:hover {
-      background-color: #fff;
-      color: #333;
-    }
-
-    .btn-auth {
-      padding: 5px 10px;
-      background: crimson;
-      border-radius: 10px;
-      border: none;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      color: white;
-      font-size: 12px;
-    }
-    .btn-auth:hover {
-      border: 2px solid #fff;
-      background: transparent;
-      color: white;
-    }
-
-    .hero_img {
-      width: 100%;
-      z-index: 10;
-      position: relative;
-      margin-top: 50px;
-    }
     #menu_toggle {
       display: none;
+      font-size: 24px;
+      cursor: pointer;
     }
 
-    /* Reponsive */
-    @media (width < 860px) {
-      #menu_toggle {
-        display: block;
-      }
-      .nav {
-        padding: 0 20px;
-        background-color: crimson;
-      }
-
-      .menu_items {
-        position: fixed;
-        top: 0;
-        width: 260px;
-        background-color: #121212;
-        color: white;
-        height: 100%;
-        left: -100%;
-        padding: 50px 30px 30px;
-        flex-direction: column;
-        transition: all 0.5s ease;
-      }
-      .showMenu .menu_items {
-        left: 0;
-      }
-      a {
-        color: #fff;
-      }
-      #menu_toggle {
-        width: 20px;
-        cursor: pointer;
-      }
-      .menu_items #menu_toggle {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-      }
-      .hero {
-        padding-top: 130px;
-      }
-      .hero .row {
-        flex-direction: column;
-        padding: 0 20px;
-        justify-content: center;
-      }
-      .hero .row .column {
-        width: 100%;
-      }
-    }
-
-    @media (width < 600px) {
-      .hero {
-        padding-top: 80px;
-      }
-      .hero .row h2 {
-        font-size: 26px;
-      }
-      .buttons {
-        justify-content: center;
-      }
-      .btn {
-        padding: 10px 16px;
-      }
-    }
-
-    .about h2 {
-      text-align: center;
-      margin-top: 50px;
-      font-size: 50px;
-    }
-    .about p {
-      text-align: center;
-      margin-top: 20px;
-      font-size: 20px;
-      font-family: roboto;
-      margin-bottm: 20px;
-    }
-
-    .wrapper {
-      display: grid;
-      margin: 200px 90px auto;
-      grid-gap: 20px;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    }
-
-    @media (max-width: 700px) {
-      .wrapper {
-        margin: 0px auto;
-      }
-    }
-
-    .wrapper .box {
-      width: 350px;
-      margin: 0 auto;
-      position: relative;
-      perspective: 1000px;
-    }
-
-    .wrapper .box .front-face {
-      background: #131313;
-      height: 220px;
-      width: 100%;
+    /* Hero Section */
+    .hero {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      box-shadow: 0px 5px 20px 0px rgba(0, 81, 250, 0.1);
-      transition: all 0.5s ease;
+      align-items: center;
+      height: 100vh;
+      padding: 50px;
+      text-align: center;
     }
 
-    .box .front-face .icon {
-      height: 80px;
-    }
-
-    .box .front-face .icon i {
-      font-size: 65px;
-    }
-
-    .box .front-face span,
-    .box .back-face span {
-      font-size: 22px;
-      font-weight: 600;
-      text-transform: uppercase;
-    }
-
-    .box .front-face .icon i,
-    .box .front-face span {
-      background: linear-gradient(-135deg, #c850c0, #4158d0);
+    .hero h2 {
+      font-size: 42px;
+      margin-bottom: 10px;
+      background: linear-gradient(90deg, cyan, violet);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-
-    .box .back-face {
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 1;
-      height: 220px;
-      width: 100%;
-      padding: 30px;
-      color: #fff;
-      opacity: 0;
-      transform-style: preserve-3d;
-      backface-visibility: hidden;
-      background: linear-gradient(-135deg, #c850c0, #4158d0);
-      transform: translateY(110px) rotateX(-90deg);
-      box-shadow: 0px 5px 20px 0px rgba(0, 81, 250, 0.1);
-      transition: all 0.5s ease;
+    
+    .hero p {
+      font-size: 18px;
+      margin-bottom: 20px;
+      opacity: 0.8;
     }
-
-    .box .back-face p {
-      margin-top: 10px;
-      text-align: justify;
-    }
-
-    .box:hover .back-face {
-      opacity: 1;
-      transform: rotateX(0deg);
-    }
-
-    .box:hover .front-face {
-      opacity: 0;
-      transform: translateY(-110px) rotateX(90deg);
-    }
-
-    .service h2 {
-      text-align: center;
-      font-size: 50px;
-      margin-top: 70px;
-    }
-
-    .pricing-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 5px;
-    }
-
-    .card {
-      background-color: #121212;
+    
+    .btn {
+      padding: 12px 25px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50px;
+      border: 1px solid white;
+      cursor: pointer;
       color: white;
-      padding: 70px;
-      width: 400px;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+    
+    .btn:hover {
+      background: white;
+      color: black;
+      transform: scale(1.1);
     }
 
-    .card-body {
-      text-align: center;
+    /* Music Player */
+    .music-player {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 10px;
+      border-radius: 50px;
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
-    /* Responsiveness */
-    @media screen and (max-width: 767px) {
-      .pricing-container {
-        flex-direction: column;
+    .music-player i {
+      font-size: 20px;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .music-player i:hover {
+      color: cyan;
+    }
+
+    /* Footer */
+    footer {
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      margin-top: 50px;
+    }
+
+    footer p {
+      font-size: 14px;
+      color: white;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      header {
+        padding: 15px 30px;
       }
 
-      .card {
-        width: 100%;
+      .menu_items {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 30px;
+        background: rgba(0, 0, 0, 0.8);
+        border-radius: 10px;
+        padding: 10px;
+      }
+
+      .menu_open .menu_items {
+        display: flex;
+      }
+
+      #menu_toggle {
+        display: block;
       }
     }
   </style>
-
-  <!-- Icon -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-  <main>
-    <!-- Header Start -->
-    <header>
-      <nav class="nav container">
-        <a href="/"><h2 class="nav_logo" style="color: white;">Faris<font style="color: cyan;">API</font></h2></a>
 
-        <ul class="menu_items">
-          <i id="menu_toggle" class="fa fa-times"></i>
-          <li><a href="#" class="nav_link">Home</a></li>
-          <li><a href="#about" class="nav_link">About</a></li>
-          <li><a href="#service" class="nav_link">Service</a></li>
-          <li><a href="/api" class="nav_link">Docs</a></li>
-          <a href="https://instagram.com/@rizzcodee">Instagram</a>
-          <a href="https://wa.me/6288297877862">WhatsApp</a>
-        </ul>
-        <i id="menu_toggle" class="fa fa-bars"></i>
-      </nav>
-    </header>
-    <!-- Header End -->
+  <!-- Header -->
+  <header>
+   <h2>Faris</h2>
+    <ul class="menu_items">
+      <a href="index.html">Home</a>
+      <a href="#about">About</a>
+      <a href="#service">Service</a>
+      <a href="/api">Docs</a>
+    </ul>
+    <i id="menu_toggle" class="fa fa-bars"></i>
+  </header>
 
-    <!-- Hero Start -->
-    <section class="hero">
-      <div class="row container">
-        <div class="column">
-          <h2>Bingung mencari Restfull API Gratis?</h2>
-          <p>
-            Tenang, kami menyediakan website Restfull API untuk anda.
-          </p>
-          <div class="buttons">
-            <a href="/api"><button class="btn">Get Started</button></a>
-          </div>
-        </div>
-        <div class="column">
-          <img src="https://telegra.ph/file/b849a052a00dbbfcd53fd.jpg" class="hero_img" />
-        </div>
-      </div>
-    </section>
-    <!-- Hero End-->
-  </main>
-  <!-- ======= About Us Section ======= -->
-  <section id="about" class="about">
-    <div class="container" data-aos="fade-up" data-aos-duration="2000">
-      <div class="section-title">
-        <h2 id="about-heading">About</h2>
-      </div>
-      <div class="row content">
-        <div class="col-lg-6">
-          <p>
-            Rest API adalah website Restfull API untuk WhatsApp bot atau lain-lain, website Restfull API ini Gratis untuk kebutuhan bot, data kamu dalam Restfull API juga tersimpan ke dalam Database.
-          </p>
-        </div>
-      </div>
-
-    </div>
+  <!-- Hero -->
+  <section class="hero">
+    <h2>Butuh Rest Api Gratis?</h2>
+    <p>Kami menyediakan Restful Api Gratis untuk berbagai kebutuhan Anda.</p>
+    <a href="/api"><button class="btn">Get Started</button></a>
   </section>
-  <!-- End About Us Section -->
-  <!-- Services -->
-  <section id="service" class="service">
-    <h2>Service</h2>
-    <div class="wrapper">
-      <div class="box">
-        <div class="front-face">
-          <div class="icon">
-            <i class="fa fa-key"></i>
-          </div>
-          <span style="text-align: center;">Free API</span>
-        </div>
-        <div class="back-face">
-          <span>Free API</span>
-          <p>
-            Website ini menyediakan Gratis API untuk anda dengan Gratis, dan setiap limit jika habis akan direzet kembali ke limit 25/Days setiap jam 12.00
-          </p>
-        </div>
-      </div>
-      <div class="box">
-        <div class="front-face">
-          <div class="icon">
-            <i class="fas fa-database"></i>
-          </div>
-          <span>Database</span>
-        </div>
-        <div class="back-face">
-          <span>Database</span>
-          <p>
-            Website Restfull API ini menggunakan Database SQL, jadi tenang data Anda akan tersimpan lebih aman di dalam Website ini.
-          </p>
-        </div>
-      </div>
-      <div class="box">
-        <div class="front-face">
-          <div class="icon">
-            <i class="fas fa-robot"></i>
-          </div>
-          <span>Attractive Features</span>
-        </div>
-        <div class="back-face">
-          <span>Attractive Features</span>
-          <p>
-            Website ini cukup membantu kebutuhan WhatsApp bot menjadi lebih baik, dan setiap features akan di bantu oleh Restfull API.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-<!-- Footer -->
-<footer class="container bg-dark text-white text-center py-5" align="center" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
-<p style="margin-bottom: 10px">
-Copyright &copy; 2024 Penyedia Base Web Rest Api Dannteam All rights reserved.
-</p>
-</footer>
-<script>
-  const header = document.querySelector("header");
-  const menuToggler = document.querySelectorAll("#menu_toggle");
+  
+<!-- About Section -->
+<section id="about" class="about">
+  <h2>Tentang Kami</h2>
+  <p>Kami menyediakan Restful API gratis yang dapat digunakan untuk berbagai kebutuhan developer.</p>
+  <p>API kami dirancang dengan performa tinggi, mudah digunakan, dan memiliki dokumentasi lengkap.</p>
+</section>
 
-  menuToggler.forEach(toggler => {
-    toggler.addEventListener("click", () => header.classList.toggle("showMenu"));
-  });
-</script>
+<!-- Services Section -->
+<section id="service" class="services">
+  <h2>Layanan Kami</h2>
+  <div class="service-list">
+    <div class="service-item">
+      <i class="fa fa-database"></i>
+      <h3>Data API</h3>
+      <p>API dengan berbagai data yang dapat digunakan untuk aplikasi Anda.</p>
+    </div>
+    <div class="service-item">
+      <i class="fa fa-bolt"></i>
+      <h3>Performa Tinggi</h3>
+      <p>Server kami dioptimalkan untuk kecepatan dan stabilitas.</p>
+    </div>
+    <div class="service-item">
+      <i class="fa fa-lock"></i>
+      <h3>Keamanan Terjamin</h3>
+      <p>Keamanan data menjadi prioritas utama dalam setiap layanan API kami.</p>
+    </div>
+  </div>
+</section>
+
+  <!-- Music Player -->
+  <div class="music-player">
+    <i id="playPause" class="fa fa-play"></i>
+    <audio id="backgroundMusic" loop>
+      <source src="https://www.bensound.com/bensound-music/bensound-hey.mp3" type="audio/mp3">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2024 Faris API. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Navbar Toggle
+    document.querySelector("#menu_toggle").addEventListener("click", () => {
+      document.querySelector("header").classList.toggle("menu_open");
+    });
+
+    // Music Player
+    const music = document.getElementById("backgroundMusic");
+    const playPause = document.getElementById("playPause");
+
+    playPause.addEventListener("click", () => {
+      if (music.paused) {
+        music.play();
+        playPause.classList.replace("fa-play", "fa-pause");
+      } else {
+        music.pause();
+        playPause.classList.replace("fa-pause", "fa-play");
+      }
+    });
+  </script>
+
 </body>
 </html>
