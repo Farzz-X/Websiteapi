@@ -69,6 +69,41 @@ async function jadwalSholat() {
     }
 }
 
+
+
+async function JadwalTvBola() {
+  try {
+    const headers = {
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, seperti Gecko) Chrome/120.0.0.0 Safari/537.36',
+      'Accept-Language': 'id-ID,id;q=0.9,en-US;q=0.8,en;q=0.7'
+    }
+
+    const response = await axios.get('https://www.goal.com/id/berita/jadwal-siaran-langsung-sepakbola/1qomojcjyge9n1nr2voxutdc1n', { headers })
+
+    const html = await response.text()
+    const $ = cheerio.load(html)
+
+    let hasil = []
+
+    $('table tbody tr').each((_, el) => {
+      const kolek = $(el).find('td')
+      const time = $(kolek[0]).text().trim()
+      const match = $(kolek[1]).text().trim()
+      const liga = $(kolek[2]).text().trim()
+      const televisi = $(kolek[3]).text().trim() || 'Gak tau'
+
+      if (time && match && liga) {
+        const [tim1, tim2] = match.split(' vs ')
+        hasil.push({ time, match, tim1, tim2, liga, televisi })
+      }
+    })
+
+    return hasil
+  } catch (err) {
+    throw Error(err.message)
+  }
+}
+
 async function tiktokdll(query) {
   return new Promise(async (resolve, reject) => {
     try {
