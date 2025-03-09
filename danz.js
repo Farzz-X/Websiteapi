@@ -81,7 +81,7 @@ async function JadwalTvBola() {
     const response = await axios.get('https://www.goal.com/id/berita/jadwal-siaran-langsung-sepakbola/1qomojcjyge9n1nr2voxutdc1n', { headers })
 
     
-    const $ = cheerio.load(response)
+    const $ = cheerio.load(response);
 
     let hasil = []
 
