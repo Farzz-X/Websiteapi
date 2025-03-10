@@ -576,6 +576,7 @@ module.exports = {
   brat,
   tiktokdll,
   JadwalTvBola,
+  igdown,
   islamai,
   jadwalSholat,
   aiodl
