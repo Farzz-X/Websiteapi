@@ -318,6 +318,27 @@ app.get('/capcut', async (req, res) => {
   }
 });
 
+app.get('/igdown', async (req, res) => {
+  const url = req.query.url;
+  if (!url) return res.json(msg.paramurl);
+
+  try {
+    const data = await igdown(url);
+    if (!data) {
+      return res.json({ status: false, message: msg.nodata });
+    }
+
+    res.json({
+      status: true,
+      creator: author,
+      result: data
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
 app.get('/facebook', async (req, res) => {
   const url = req.query.url;
   if (!url) return res.json(msg.paramurl);
