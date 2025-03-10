@@ -28,6 +28,45 @@ async function tiktok(url) {
   });
 }
 
+async function igdown(q) {
+    try {
+        const response = await axios.post("https://saveig.app/api/ajaxSearch", new URLSearchParams({
+            q,
+            t: "media",
+            lang: "id"
+        }));
+        const html = response.data.data;
+        const $ = cheerio.load(html);
+        const data = $('ul.download-box li').map((index, element) => {
+            const $thumb = $(element).find('.download-items__thumb img');
+            const $btn = $(element).find('.download-items__btn a');
+            const $options = $(element).find('.photo-option select option');
+            const type = $btn.attr('onclick')?.includes('click_download_video') ? 'video' : 'image';
+            return {
+                type,
+                thumb: $thumb.attr('src') || '',
+                url: $btn.attr('href')?.replace('&dl=1', '') || '',
+                quality: $options.filter(':selected').text() || '',
+                options: $options.map((i, opt) => ({
+                    type,
+                    url: $(opt).val() || '',
+                    quality: $(opt).text() || ''
+                })).get()
+            };
+        }).get();
+        const result = {
+            data: data
+        };
+        return result;
+    } catch (error) {
+        console.error("Error fetching Instagram media:", error);
+        return {
+            error: "Failed to fetch media"
+        };
+    }
+}
+
+
 async function jadwalSholat() {
     try {
         const { data } = await axios.get("https://prayer-times.muslimpro.com/en/find?country_code=ID&country_name=Indonesia&city_name=undefined&coordinates=-6.1944491,106.8229198#");
