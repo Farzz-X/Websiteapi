@@ -472,6 +472,7 @@ module.exports = {
   tiktoksearch,
   pindl,
   listmember,
+  SimSimi,
   luminai,
   pinterest,
   brat,
