@@ -1,5 +1,5 @@
 require('./message');
-const { tiktok, capcut, igdl, fbdl, aiodl, islamai,tiktoksearch, pindl, listmember, luminai, pinterest, brat, tiktokdll, jadwalSholat, JadwalTvBola } = require('./danz');
+const { tiktok, capcut, igdl, fbdl, aiodl, islamai,tiktoksearch, pindl, listmember, luminai, pinterest, brat, tiktokdll, jadwalSholat, JadwalTvBola,SimSimi } = require('./danz');
 const express = require('express');
 const rateLimit = require('express-rate-limit');
 const compression = require('compression');
@@ -129,13 +129,13 @@ app.get('/tiktok', async (req, res) => {
   }
 });            
 
- app.get('/Simsi', async (req, res) => {
+ app.get('/SimSimi', async (req, res) => {
     try {
       const { text } = req.query;
       if (!text) {
         return res.status(400).json({ error: 'Parameter "text" Tidak Ditemukan, Tolong Masukkan Perintah' });
       }
-      const response = await Simsi(text);
+      const response = await SimSimi(text);
       res.status(200).json({
         status: true,
       creator: author,
