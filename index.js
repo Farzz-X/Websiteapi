@@ -183,11 +183,11 @@ app.get('/islamai', async (req, res) => {
 
 app.get('/githubStalk', async (req, res) => {
     try {
-      const { text } = req.query;
-      if (!text) {
+      const { username } = req.query.username;
+      if (!username) {
         return res.status(400).json({ error: 'Parameter "text" Tidak Ditemukan, Tolong Masukkan Perintah' });
       }
-      const response = await githubStalk(text);
+      const response = await githubStalk(username);
       res.status(200).json({
         status: true,
       creator: author,
