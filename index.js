@@ -381,6 +381,26 @@ app.get('/aio', async (req, res) => {
   }
 });
 
+app.get('/getSearchResults', async (req, res) => {
+  const url = req.query.url;
+  if (!url) return res.json(msg.paramurl);
+
+  try {
+    const data = await getSearchResults(url);
+    if (!data) {
+      return res.json({ status: false, message: msg.nodata });
+    }
+
+    res.json({
+      status: true,
+      creator: author,
+      result: data
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});                       
+
 // Search
 app.get('/listmember', async (req, res) => {
   const query = req.query.query;
