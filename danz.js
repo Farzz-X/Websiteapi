@@ -610,6 +610,7 @@ module.exports = {
   SimSimi,
   luminai,
   pinterest,
+  ytmp3,
   brat,
   tiktokdll,
   JadwalTvBola,
