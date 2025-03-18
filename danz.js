@@ -28,6 +28,43 @@ async function tiktok(url) {
   });
 }
 
+async function ytmp3(url) {
+    const format = "mp3"; 
+    const response = await axios.get(`https://youtubedownloader.me/api/download?format=${format}&url=${encodeURIComponent(url)}`, {
+        headers: {
+            "User-Agent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36",
+            "Referer": "https://youtubedownloader.me/"
+        }
+    });
+
+    const videoId = response.data.id;
+
+    let progress = 0;
+    let downloadUrl = null;
+    let attempt = 0;
+
+    while (progress < 1000 && attempt < 20) {
+        const progressResponse = await axios.get(`https://youtubedownloader.me/api/progress?id=${videoId}`, {
+            headers: {
+                "User-Agent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36",
+                "Referer": "https://youtubedownloader.me/"
+            }
+        });
+
+        progress = progressResponse.data.progress;
+
+        if (progress >= 1000) {
+            downloadUrl = progressResponse.data.download_url;
+            break;
+        }
+
+        attempt++;
+        await new Promise(resolve => setTimeout(resolve, 3000));
+    }
+
+    return downloadUrl;
+}
+
 async function igdown(q) {
     try {
         const response = await axios.post("https://saveig.app/api/ajaxSearch", new URLSearchParams({
