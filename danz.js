@@ -608,6 +608,7 @@ module.exports = {
   pindl,
   listmember,
   SimSimi,
+  ytmp3,
   luminai,
   pinterest,
   brat,
