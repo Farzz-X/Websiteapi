@@ -108,12 +108,12 @@ app.get('/tiktok', async (req, res) => {
   }
 });
 
- app.get('/Ytdl', async (req, res) => {
+  app.get('/ytmp3', async (req, res) => {
   const url = req.query.url;
   if (!url) return res.json(msg.paramurl);
 
   try {
-    const data = await Ytdl(url);
+    const data = await ytmp3(url);
     if (!data) {
       return res.json({ status: false, message: msg.nodata });
     }
@@ -121,13 +121,12 @@ app.get('/tiktok', async (req, res) => {
     res.json({
       status: true,
       creator: author,
-      limitnya: limit,
       result: data
     });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-});            
+});
 
  app.get('/SimSimi', async (req, res) => {
     try {
