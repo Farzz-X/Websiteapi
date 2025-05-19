@@ -767,6 +767,7 @@ module.exports = {
   pinterest,
   ytmp3,
   Ytdl,
+  ytsearch,
   brat,
   tiktokdll,
   JadwalTvBola,
