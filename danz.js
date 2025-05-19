@@ -157,12 +157,6 @@ async function ytsearch(query) {
   })
 }
 
-const clean = e => (e = e.replace(/(<br?\s?\/>)/gi, " \n")).replace(/(<([^>] )>)/gi, "")
-
-async function shortener(e) {
-  return e
-}
-
 async function tiktok(url) {
   return new Promise(async (resolve, reject) => {
     try {
