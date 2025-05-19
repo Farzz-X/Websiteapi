@@ -4,6 +4,7 @@ const FormData = require('form-data')
 const WebSocket = require('ws')
 const crypto = require('crypto')
 const qs = require("qs");
+const yts = require("yt-search")
 
 const clean = e => (e = e.replace(/(<br?\s?\/>)/gi, " \n")).replace(/(<([^>] )>)/gi, "");
 
@@ -138,6 +139,28 @@ async function Ytdl(url, type, quality) {
   } catch (err) {
     throw Error(err.message)
   }
+}
+
+async function ytsearch(query) {
+  return new Promise((resolve, reject) => {
+    try {
+      const cari = yts(query)
+      .then((data) => {
+        res = data.all
+        return res
+      })
+      resolve(cari)
+    } catch (error) {
+      reject(error)
+    }
+    console.log(error)
+  })
+}
+
+const clean = e => (e = e.replace(/(<br?\s?\/>)/gi, " \n")).replace(/(<([^>] )>)/gi, "")
+
+async function shortener(e) {
+  return e
 }
 
 async function tiktok(url) {
