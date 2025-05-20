@@ -1,5 +1,5 @@
 require('./message');
-const { tiktok, capcut, igdl, fbdl, aiodl, islamai,tiktoksearch, pindl, listmember, luminai, pinterest, brat, tiktokdll, jadwalSholat, JadwalTvBola,SimSimi,igdown, ytmp3, Ytdl, ytsearch } = require('./danz');
+const { tiktok, capcut, igdl, fbdl, aiodl, islamai,tiktoksearch, pindl, listmember, luminai, pinterest, brat, tiktokdll, jadwalSholat, JadwalTvBola,SimSimi,igdown, ytmp3, Ytdl } = require('./danz');
 const express = require('express');
 const rateLimit = require('express-rate-limit');
 const compression = require('compression');
@@ -468,26 +468,6 @@ app.get('/tiktoksearch', async (req, res) => {
 
   try {
     const data = await tiktoksearch(query);
-    if (!data) {
-      return res.json({ status: false, message: msg.nodata });
-    }
-
-    res.json({
-      status: true,
-      creator: author,
-      result: data
-    });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-app.get('/ytsearch', async (req, res) => {
-  const query = req.query.query;
-  if (!query) return res.json(msg.paramquery);
-
-  try {
-    const data = await ytsearch(query);
     if (!data) {
       return res.json({ status: false, message: msg.nodata });
     }
