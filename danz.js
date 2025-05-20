@@ -141,22 +141,6 @@ async function Ytdl(url, type, quality) {
   }
 }
 
-async function ytsearch(query) {
-  return new Promise((resolve, reject) => {
-    try {
-      const cari = yts(query)
-      .then((data) => {
-        res = data.all
-        return res
-      })
-      resolve(cari)
-    } catch (error) {
-      reject(error)
-    }
-    console.log(error)
-  })
-}
-
 async function tiktok(url) {
   return new Promise(async (resolve, reject) => {
     try {
@@ -761,7 +745,6 @@ module.exports = {
   pinterest,
   ytmp3,
   Ytdl,
-  ytsearch,
   brat,
   tiktokdll,
   JadwalTvBola,
