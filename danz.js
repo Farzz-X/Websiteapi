@@ -4,7 +4,6 @@ const FormData = require('form-data')
 const WebSocket = require('ws')
 const crypto = require('crypto')
 const qs = require("qs");
-const yts = require("yt-search")
 
 const clean = e => (e = e.replace(/(<br?\s?\/>)/gi, " \n")).replace(/(<([^>] )>)/gi, "");
 
