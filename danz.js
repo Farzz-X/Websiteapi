@@ -557,7 +557,7 @@ async function brat(text) {
 
 async function luminai(content) {
   try {
-    const response = await axios.post('https://luminai.my.id/', { content });
+    const response = await axios.post('https://ai.siputzx.my.id/', { content });
     return response.data;
   } catch (error) {
     console.error("Error fetching content from LuminAI:", error);
