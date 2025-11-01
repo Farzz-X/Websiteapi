@@ -1,353 +1,258 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Rest Api</title>
-    <meta property="og:title" content="Faris API">
-    <meta property="og:description" content="The official Faris API Restful API's">
-    <meta property="og:image" content="https://telegra.ph/file/b849a052a00dbbfcd53fd.jpg">
-    
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-            transition: all 0.3s ease-in-out;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RestApi Ris</title>
+  <meta property="og:title" content="Ris Api">
+  <meta property="og:description" content="Faris RESTful API — fast, elegant, and easy to use.">
+  <meta property="og:image" content="https://telegra.ph/file/b849a052a00dbbfcd53fd.jpg">
 
-        :root {
-            --bg-color: #f9f9f9;
-            --text-color: #333;
-            --card-color: #fff;
-            --border-color: #ddd;
-            --button-bg: #4CAF50;
-            --button-hover: #388E3C;
-            --shadow: rgba(0, 0, 0, 0.1);
-        }
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
-        body.dark-mode {
-            --bg-color: #121212;
-            --text-color: #e0e0e0;
-            --card-color: #1E1E1E;
-            --border-color: #333;
-            --button-bg: #007AFF;
-            --button-hover: #005BB5;
-            --shadow: rgba(255, 255, 255, 0.1);
-        }
-        
-        body {
-            background: var(--bg-color);
-            color: var(--text-color);
-            text-align: center;
-            padding: 40px 20px;
-        }
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --text: #1e293b;
+      --card: #ffffff;
+      --accent: #007aff;
+      --border: #e2e8f0;
+      --muted: #64748b;
+      --shadow: rgba(0, 0, 0, 0.05);
+    }
 
-        h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            background: linear-gradient(90deg, #007AFF, #4CAF50);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+    body.dark-mode {
+      --bg: #0d1117;
+      --text: #e5e7eb;
+      --card: #161b22;
+      --accent: #3b82f6;
+      --border: #2d333b;
+      --muted: #9ca3af;
+      --shadow: rgba(255, 255, 255, 0.05);
+    }
 
-        .description {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-            color: #666;
-        }
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+      transition: all 0.25s ease;
+    }
 
-        /* STATUS BAR */
-        .status {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            background: var(--card-color);
-            padding: 12px 20px;
-            border-radius: 12px;
-            box-shadow: 0px 4px 10px var(--shadow);
-            width: fit-content;
-            margin: 0 auto 30px;
-            border: 1px solid var(--border-color);
-        }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      text-align: center;
+      padding: 40px 20px;
+    }
 
-        /* TOGGLE MODE GELAP */
-        .toggle-dark {
-            background: var(--button-bg);
-            color: #fff;
-            border: none;
-            padding: 10px 18px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: bold;
-        }
+    h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--accent), #60a5fa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
 
-        .toggle-dark:hover {
-            background: var(--button-hover);
-            transform: scale(1.05);
-        }
+    .description {
+      font-size: 1.1rem;
+      color: var(--muted);
+      margin-bottom: 40px;
+    }
 
-        /* TABEL */
-        .table-container {
-            width: 100%;
-            max-width: 700px;
-            margin: 0 auto;
-            overflow-x: auto;
-        }
+    .status {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      background: var(--card);
+      padding: 14px 24px;
+      border-radius: 14px;
+      box-shadow: 0 4px 14px var(--shadow);
+      width: fit-content;
+      margin: 0 auto 50px;
+      border: 1px solid var(--border);
+    }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background: var(--card-color);
-            box-shadow: 0px 4px 10px var(--shadow);
-            border-radius: 10px;
-            overflow: hidden;
-            margin-bottom: 20px;
-        }
+    .toggle-dark {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      box-shadow: 0 2px 6px var(--shadow);
+    }
 
-        th, td {
-            padding: 14px;
-            text-align: left;
-            border-bottom: 1px solid var(--border-color);
-        }
+    .toggle-dark:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
 
-        th {
-            background: var(--button-bg);
-            color: white;
-            font-weight: bold;
-        }
+    table {
+      width: 100%;
+      max-width: 850px;
+      margin: 30px auto;
+      border-collapse: collapse;
+      border-radius: 14px;
+      overflow: hidden;
+      background: var(--card);
+      box-shadow: 0 6px 16px var(--shadow);
+    }
 
-        tr:hover {
-            background: var(--border-color);
-        }
+    th, td {
+      padding: 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
 
-        a {
-            color: var(--button-bg);
-            text-decoration: none;
-            font-weight: 500;
-            display: inline-block;
-            padding: 6px 10px;
-            border-radius: 6px;
-        }
+    th {
+      background: var(--accent);
+      color: #fff;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-size: 0.9rem;
+    }
 
-        a:hover {
-            text-decoration: underline;
-        }
+    tr:last-child td {
+      border-bottom: none;
+    }
 
-        footer {
-            margin-top: 20px;
-            font-size: 14px;
-            color: #888;
-        }
-    </style>
+    tr:hover td {
+      background: rgba(0, 0, 0, 0.03);
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    h3 {
+      margin-top: 60px;
+      font-size: 1.4rem;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    footer {
+      margin-top: 60px;
+      color: var(--muted);
+      font-size: 14px;
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+    }
+  </style>
 </head>
+
 <body>
+  <h1>⚡Ris Api</h1>
+  <p class="description">RestApi Collection – clean, fast, and powerful.</p>
 
-    <h1>RestApi</h1>
-    <p class="description">The official Faris Restful Api</p>
+  <div class="status">
+    <span id="clock">00:00:00</span>
+    <span id="battery">🔋 Checking...</span>
+    <button class="toggle-dark" onclick="toggleDarkMode()">🌙 Mode Gelap</button>
+  </div>
 
-    <!-- STATUS BAR -->
-    <div class="status">
-        <span id="clock">00:00:00</span>
-        <span id="battery">🔋 Checking...</span>
-        <button class="toggle-dark" onclick="toggleDarkMode()">🌙 Dark Mode</button>
-    </div>
- <h3>Features</h3>
-        <table>
-            <hr>
-            <tr>
-                <th>No</th>
-                <th>Name</th>
-                <th>Method</th>
-                <th>Action</th>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>Aiovideo Downloader</td>
-                <td>GET</td>
-                <td><a href="/aio?url=">[ ➠ ]</a></td>
-            </tr>
+  <h3>Features</h3>
+  <table>
+    <tr>
+      <th>No</th>
+      <th>Name</th>
+      <th>Method</th>
+      <th>Action</th>
+    </tr>
+    <tr><td>1</td><td>Aiovideo Downloader</td><td>GET</td><td><a href="/aio?url=">[ ➠ ]</a></td></tr>
+    <tr><td>2</td><td>Capcut</td><td>GET</td><td><a href="/capcut?url=">[ ➠ ]</a></td></tr>
+    <tr><td>3</td><td>Douyin Downloader</td><td>GET</td><td><a href="/douyindl?url=">[ ➠ ]</a></td></tr>
+    <tr><td>4</td><td>Facebook Downloader</td><td>GET</td><td><a href="/facebook?url=">[ ➠ ]</a></td></tr>
+    <tr><td>5</td><td>Tiktok Downloader</td><td>GET</td><td><a href="/tiktok?url=">[ ➠ ]</a></td></tr>
+    <tr><td>6</td><td>Pinterest Download</td><td>GET</td><td><a href="/pindl?url=">[ ➠ ]</a></td></tr>
+    <tr><td>7</td><td>TiktokDl Downloader</td><td>GET</td><td><a href="/tiktokdll?url=">[ ➠ ]</a></td></tr>
+    <tr><td>8</td><td>Ig Downloader</td><td>GET</td><td><a href="/igdown?url=">[ ➠ ]</a></td></tr>
+    <tr><td>9</td><td>Ig Downloader v2</td><td>GET</td><td><a href="/Instagram?url=">[ ➠ ]</a></td></tr>
+    <tr><td>10</td><td>Yt Downloader</td><td>GET</td><td><a href="/ytmp3?url=">[ ➠ ]</a></td></tr>
+    <tr><td>11</td><td>Yt Downloader v2</td><td>GET</td><td><a href="/Ytdl?url=">[ ➠ ]</a></td></tr>
+  </table>
 
-            <tr>
-                <td>2</td>
-                <td>Capcut Downloader</td>
-                <td>GET</td>
-                <td><a href="/capcut?url=">[ ➠ ]</a></td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Douyin Downloader</td>
-                <td>GET</td>
-                <td><a href="/douyindl?url=">[ ➠ ]</a></td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>Facebook Downloader</td>
-                <td>GET</td>
-                <td><a href="/facebook?url=">[ ➠ ]</a></td>
-            </tr>
-           
-                <td>5</td>
-                <td>Tiktok Downloader</td>
-                <td>GET</td>
-                <td><a href="/tiktok?url=">[ ➠ ]</a></td>
-            </tr>
-            <tr>
-<td>6</td>
-                <td>Pinterest Download</td>
-                <td>GET</td>
-                <td><a href="/pindl?url=">[ ➠ ]</a></td>
-            </tr>
+  <h3>Searching</h3>
+  <table>
+    <tr>
+      <th>No</th>
+      <th>Name</th>
+      <th>Method</th>
+      <th>Action</th>
+    </tr>
+    <tr><td>1</td><td>Tikoks</td><td>GET</td><td><a href="/tiktoksearch?query=">[ ➠ ]</a></td></tr>
+    <tr><td>2</td><td>listmemjkt</td><td>GET</td><td><a href="/listmember?query=">[ ➠ ]</a></td></tr>
+    <tr><td>3</td><td>Pinterest</td><td>GET</td><td><a href="/pinterest?query=">[ ➠ ]</a></td></tr>
+    <tr><td>4</td><td>Jadwalsholat</td><td>GET</td><td><a href="/jadwalSholat?query=">[ ➠ ]</a></td></tr>
+    <tr><td>5</td><td>JadwalTvBola</td><td>GET</td><td><a href="/JadwalTvBola?query=">[ ➠ ]</a></td></tr>
+  </table>
 
+  <h3>AI</h3>
+  <table>
+    <tr>
+      <th>No</th>
+      <th>Name</th>
+      <th>Method</th>
+      <th>Action</th>
+    </tr>
+    <tr><td>1</td><td>Islam Ai</td><td>GET</td><td><a href="/islamai?text=hai">[ ➠ ]</a></td></tr>
+    <tr><td>2</td><td>luminAi</td><td>GET</td><td><a href="/luminai?text=hai">[ ➠ ]</a></td></tr>
+  </table>
 
-                      <tr>
-                <td>8</td>
-                <td>TiktokDl Downloader</td>
-                <td>GET</td>
-                <td><a href="/tiktokdll?url=">[ ➠ ]</a></td>
-            </tr>
+  <h3>Stalker</h3>
+  <table>
+    <tr>
+      <th>No</th>
+      <th>Name</th>
+      <th>Method</th>
+      <th>Action</th>
+    </tr>
+    <tr><td>1</td><td>Gitstalk</td><td>GET</td><td><a href="/githubStalk?user=farisofc">[ ➠ ]</a></td></tr>
+  </table>
 
-<tr>
-                <td>9</td>
-                <td>Ig Downloader</td>
-                <td>GET</td>
-                <td><a href="/igdown?url=">[ ➠ ]</a></td>
-            </tr>
-<tr>
-                <td>10</td>
-                <td>Ig Downloader v2</td>
-                <td>GET</td>
-                <td><a href="/Instagram?url=">[ ➠ ]</a></td>
-            </tr>
-<tr>
-                <td>11</td>
-                <td>Yt Downloader</td>
-                <td>GET</td>
-                <td><a href="/ytmp3?url=">[ ➠ ]</a></td>
-            </tr>
-<tr>
-                <td>12</td>
-                <td>Yt Downloader v2</td>
-                <td>GET</td>
-                <td><a href="/Ytdl?url=">[ ➠ ]</a></td>
-            </tr>
-</table>
-        <h3>Searching</h3>
-         <table>
-           <hr>
-            <tr>
-                 <th>No</th>
-                 <th>Name</th>
-                 <th>Method</th>
-                <th>Action</th>
-                </tr>
-    <td>1</td>
-                <td>Tiktok Searching</td>
-                <td>GET</td>
-                <td><a href="/tiktoksearch?query=">[ ➠ ]</a></td>
-            </tr>
-<td>2</td>
-                <td>listMemberJkt48</td>
-                <td>GET</td>
-                <td><a href="/listmember?query=">[ ➠ ]</a></td>
-            </tr>
-<td>3</td>
-                <td>Pinterest</td>
-                <td>GET</td>
-                <td><a href="/pinterest?query=">[ ➠ ]</a></td>
-            </tr>
-<td>4</td>
-<td>jadwalSholat</td>
-                <td>GET</td>
-                <td><a href="/jadwalSholat?query=">[ ➠ ]</a></td>
-            </tr>
-<td>5</td>
-<td>JadwalTvBola</td>
-                <td>GET</td>
-                <td><a href="/JadwalTvBola?query=">[ ➠ ]</a></td>
-            </tr>
-        </table>
-        <h3>AI</h3>
-         <table>
-           <hr>
-            <tr>
-                 <th>No</th>
-                 <th>Name</th>
-                 <th>Method</th>
-                <th>Action</th>
-                </tr>
-            <tr>
-       
-<tr>
-<td>1</td>
-          <td>islamai</td>
-          <td>GET</td>
-          <td><a href="/islamai?text=hai">[ ➠ ]</a></td>
-      </tr>
+  <footer>© 2025 Faris API. All rights reserved.</footer>
 
-<tr>
-<td>2</td>
-          <td>luminai</td>
-          <td>GET</td>
-          <td><a href="/luminai?text=hai">[ ➠ ]</a></td>
-      </tr>
+  <script>
+    function updateClock() {
+      const now = new Date();
+      document.getElementById("clock").textContent = now.toLocaleTimeString();
+      setTimeout(updateClock, 1000);
+    }
 
+    function updateBattery() {
+      navigator.getBattery().then(b => {
+        const update = () => {
+          document.getElementById("battery").textContent = "🔋 " + Math.round(b.level * 100) + "%";
+        };
+        update();
+        b.addEventListener("levelchange", update);
+      });
+    }
 
-      </table>
-<h3>Stalker</h3>
-         <table>
-           <hr>
-            <tr>
-<th>No</th>
-                 <th>Name</th>
-                 <th>Method</th>
-                <th>Action</th>
-                </tr>
-    <td>1</td>
-                <td>Github Stalkrr</td>
-                <td>GET</td>
-                <td><a href="/githubStalk?user=farisofc">[ ➠ ]</a></td>
-            </tr>
-</table>
-    </div>
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark-mode");
+      const isDark = document.body.classList.contains("dark-mode");
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+      document.querySelector(".toggle-dark").textContent = isDark ? "☀ Mode Terang" : "🌙 Mode Gelap";
+    }
 
-    <!-- FOOTER -->
-    <footer>
-        <p>&#169; 2024 Faris. All rights reserved.</p>
-    </footer>
+    if (localStorage.getItem("theme") === "dark") {
+      document.body.classList.add("dark-mode");
+      document.querySelector(".toggle-dark").textContent = "☀ Mode Terang";
+    }
 
-    <script>
-        function updateClock() {
-            const now = new Date();
-            document.getElementById("clock").innerText = now.toLocaleTimeString();
-            setTimeout(updateClock, 1000);
-        }
-
-        function updateBattery() {
-            navigator.getBattery().then(battery => {
-                function setBatteryLevel() {
-                    const level = Math.round(battery.level * 100) + "%";
-                    document.getElementById("battery").innerText = `🔋 ${level}`;
-                }
-                setBatteryLevel();
-                battery.addEventListener("levelchange", setBatteryLevel);
-            });
-        }
-
-        function toggleDarkMode() {
-            document.body.classList.toggle("dark-mode");
-            const mode = document.body.classList.contains("dark-mode") ? "Dark" : "Light";
-            document.querySelector(".toggle-dark").innerText = mode === "Dark" ? "☀ Light Mode" : "🌙 Dark Mode";
-        }
-
-        updateClock();
-        updateBattery();
-    </script>
-
+    updateClock();
+    updateBattery();
+  </script>
 </body>
 </html>
